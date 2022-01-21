@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' href = 'index.css'>
+    <link rel = 'icon' type = 'image/png' href = "icon.png">
+    <title>Hangman</title>
+</head>
+<body>
+    <h1>Hangman!</h1>
+    <h2>The Great Game of Guessing...</h2>
+    <div id = 'main-menu'>
+        <button id = 'single-player'>Single Player</button>
+        <button id = 'multiplayer'>Multiplayer</button>
+    </div>
+    <div id = 'difficulty' class = 'hidden'>
+        <p>Select Difficulty:</p>
+        <br>
+        <input type = 'radio' id = 'easy' value = 'easy' name = 'difficulty'>
+        <label for = 'easy'>Easy</label>
+        <br>
+        <input type = 'radio' id = 'normal' value = 'normal' name = 'difficulty' checked>
+        <label for = 'normal'>Normal</label>
+        <br>
+        <input type = 'radio' id = 'hard' value = 'hard' name = 'difficulty'>
+        <label for = 'hard'>Hard</label>
+    </div>
+    <div id = 'theme' class = 'hidden'>
+        <p>Select theme:</p>
+        <br>
+        <input type = 'radio' id = 'colours' value = 'colours' name = 'theme' checked>
+        <label for = 'colours'>Colours</label>
+        <br>
+        <input type = 'radio' id = 'animals' value = 'animals' name = 'theme'>
+        <label for = 'animals'>Animals</label>
+        <br>
+        <input type = 'radio' id = 'films' value = 'films' name = 'theme'>
+        <label for = 'films'>Films</label>
+        <br>
+        <input type = 'radio' id = 'songs' value = 'songs' name = 'theme'>
+        <label for = 'songs'>Songs</label>
+        <br>
+        <input type = 'radio' id = 'games' value = 'games' name = 'theme'>
+        <label for = 'games'>Games</label>
+    </div>
+    <button class = 'hidden' id = 'play-game'>Play Game!</button>
+    <p id = 'score' class = 'hidden'>Score:</p>
+    <p id = 'word' class = 'hidden'></p>
+    <div id = 'virtual-keyboard' class = 'hidden'></div>
+    <script src = "index.js" type = 'module'></script>
+</body>
+</html>
+
+
+
+<!-- use @media CSS for animation-->
+<!--Have multiple files for JS, but not for html and css, use import/export for thst-->
+<!--Remember score histories-->
+<!--Hint Function (Use Dictionary to print the hint associated with the word)-->
+<!--Multiplayer Mode-->

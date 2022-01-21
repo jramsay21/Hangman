@@ -1,0 +1,11 @@
+.hidden{
+    display: none;
+}
+
+.rightGuess {
+    background-color: #4CAF50;
+}
+
+.wrongGuess {
+    background-color: #f44336;
+}
