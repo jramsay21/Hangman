@@ -9,3 +9,13 @@
 .wrongGuess {
     background-color: #f44336;
 }
+
+#canvas {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+#word{
+    letter-spacing: .5rem;
+}
