@@ -17,5 +17,7 @@
 }
 
 #word{
-    letter-spacing: .5rem;
+    letter-spacing: 0.5em;
 }
+
+/* Use CSS vh and vw to scale for mobile users + use css to move radio buttons */

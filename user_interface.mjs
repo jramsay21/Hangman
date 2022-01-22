@@ -1,34 +1,30 @@
-import { vkMechanics } from './vk_mechanics.mjs'
-import { randomWord } from './random_word.mjs';
+import { wordPicker } from './game_mechanics.mjs';
+import { enableKeyboard, vkSetup } from './keyboard.mjs';
 
-export let score = 0;
-
-function userInterface(){    
+function userInterface(){
     const el = {};
-    
-    
     
     prepareHandles();
     addEventListeners();
     vkSetup();
-    
 
     function prepareHandles(){
         el.singlePlayer = document.querySelector('#single-player');   
         el.mainMenu = document.querySelector('#main-menu');
         el.difficulty = document.querySelector('#difficulty');
         el.theme = document.querySelector('#theme');
-        el.counter = document.querySelector('#counter');
         el.playGame = document.querySelector('#play-game');
         el.gameScreen = document.querySelector('#game-screen');
-        el.score = document.querySelector('#score');
         el.word = document.querySelector('#word');
-        el.virtualKB = document.querySelector('#virtual-keyboard');  
+        el.reset = document.querySelector('#reset');
+        el.score = document.querySelector('#score');
+        el.canvas = document.querySelector('#canvas'); 
     }
 
     function addEventListeners(){
         el.singlePlayer.addEventListener('click', settingsDisplay);
         el.playGame.addEventListener('click', gameDisplay);
+        el.reset.addEventListener('click', resetUI);
     }
 
     function addAClass(list){
@@ -43,24 +39,6 @@ function userInterface(){
         }
     }
 
-    function vkSetup(){
-        const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-        let handler = function(event){
-            score = vkMechanics(event);
-            el.score.textContent = `Score: ${score}`;
-            this.removeEventListener('click', handler);
-        };
-        for (const letter of alphabet){
-            const vk = document.createElement('button');
-            vk.setAttribute('id', letter);
-            vk.textContent = letter.toUpperCase();
-            vk.className = 'vk-letters';
-            vk.addEventListener('click', handler);
-            el.virtualKB.append(vk);
-        }
-    }
-
-
     function settingsDisplay(){
         const removeList = [el.difficulty, el.theme, el.playGame];
         const addList = [el.mainMenu];
@@ -68,16 +46,13 @@ function userInterface(){
         removeAClass(removeList);
     }
 
-    
-
     function gameDisplay(){
-        const diffChoice = document.querySelector("input[type = 'radio'][name = 'difficulty']:checked").value;
-        const themeChoice = document.querySelector("input[type = 'radio'][name = 'theme']:checked").value;
+        enableKeyboard();
         const removeList = [el.gameScreen];
         const addList = [el.difficulty, el.playGame, el.theme];
         removeAClass(removeList);
         addAClass(addList);
-        const word = randomWord(diffChoice, themeChoice);
+        let word = wordPicker();
         el.word.setAttribute('name', word);
         for (const letter of word){
             if (letter !== ' '){
@@ -86,8 +61,19 @@ function userInterface(){
                 el.word.textContent = el.word.textContent + ' ';
             }
         }
-
     }
+
+    function resetUI(){
+        const removeList = [el.mainMenu];
+        const addList = [el.gameScreen, el.reset];
+        removeAClass(removeList);
+        addAClass(addList);
+        el.word.textContent = '';
+        el.score.textContent = 'Score: 0';
+        el.canvas.getContext('2d').clearRect(0, 0, el.canvas.width, el.canvas.height);
+        vkSetup();
+    }
+
 }
 
 window.addEventListener('load', userInterface);

@@ -1,17 +1,4 @@
-export function randomWord(difficulty, theme){
-  
-    const selection = ['songs', 'films', 'games', 'colours', 'animals'];
-    for (let i = 0; i < selection.length; i++){
-        if (theme === selection[i]){
-            const object = list[i];
-            const array = [...object[difficulty]];
-            return (array[Math.floor(Math.random() * array.length)]);
-        }
-        
-    }
-}
-
-const list = [ 
+export const list = [ 
 
     songs = {
         easy: ['Hey Jude', 'Bad Habits', 'Wrecking Ball', 'Despacito', 'My Girl'],

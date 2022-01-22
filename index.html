@@ -21,34 +21,26 @@
 
     <div id='difficulty' class='hidden'>
         <p>Select Difficulty:</p>
-        <br>
-        <input type='radio' id='easy' value='easy' name='difficulty'>
-        <label for='easy'>Easy</label>
-        <br>
-        <input type='radio' id='normal' value='normal' name='difficulty' checked>
-        <label for='normal'>Normal</label>
-        <br>
-        <input type='radio' id='hard' value='hard' name='difficulty'>
-        <label for='hard'>Hard</label>
+        
+        <input type='radio' id='easy' value='easy' name='difficulty'>Easy
+    
+        <input type='radio' id='normal' value='normal' name='difficulty' checked>Normal
+        
+        <input type='radio' id='hard' value='hard' name='difficulty'>Hard
     </div>
 
     <div id='theme' class='hidden'>
         <p>Select theme:</p>
-        <br>
-        <input type='radio' id='colours' value='colours' name='theme' checked>
-        <label for='colours'>Colours</label>
-        <br>
-        <input type='radio' id='animals' value='animals' name='theme'>
-        <label for='animals'>Animals</label>
-        <br>
-        <input type='radio' id='films' value='films' name='theme'>
-        <label for='films'>Films</label>
-        <br>
-        <input type='radio' id='songs' value='songs' name='theme'>
-        <label for='songs'>Songs</label>
-        <br>
-        <input type='radio' id='games' value='games' name='theme'>
-        <label for='games'>Games</label>
+        
+        <input type='radio' id='colours' value='colours' name='theme' checked>Colours
+        
+        <input type='radio' id='animals' value='animals' name='theme'>Animals
+    
+        <input type='radio' id='films' value='films' name='theme'>Films
+        
+        <input type='radio' id='songs' value='songs' name='theme'>Songs
+       
+        <input type='radio' id='games' value='games' name='theme'>Games
     </div>
 
     <button class='hidden' id='play-game'>Play Game!</button>
@@ -59,6 +51,8 @@
         <canvas id='canvas' width='720' height='540'></canvas>
         <div id='virtual-keyboard'></div>
     </div>
+
+    <button id='reset' class='hidden'>Back to Main Menu</button>
 
     <script src="user_interface.mjs" type='module'></script>
 
