@@ -1,53 +1,55 @@
-export function canvas(counter){
-    const canvas = document.querySelector('#canvas');
-    const c = canvas.getContext('2d');
-    c.beginPath();
+export function canvas(counter) {
+  const canvas = document.querySelector('#canvas');
+  const c = canvas.getContext('2d');
+  c.beginPath();
+  c.lineCap = 'square';
+  c.lineWidth = 3;
+  c.strokeStyle = '#D3D3D3';
 
-    switch (counter){
-        case 1:
-            c.moveTo(124, 500);
-            c.lineTo(600, 500);
-            break;
-        case 2:
-            c.moveTo(600, 500);
-            c.lineTo(600, 56);
-            break;
-        case 3:
-            c.moveTo(600, 56);
-            c.lineTo(250, 56);
-            break;
-        case 4:
-            c.moveTo(525, 56);
-            c.lineTo(600, 131);
-            break;
-        case 5:
-            c.moveTo(250, 56);
-            c.lineTo(250, 225);
-            break;
-        case 6:
-            c.arc(250, 250, 25, 0, 6.3);
-            break;
-        case 7:
-            c.moveTo(250, 275);
-            c.lineTo(250, 375);
-            break;
-        case 8:
-            c.moveTo(250, 375);
-            c.lineTo(300, 425);
-            break;
-        case 9:
-            c.moveTo(250, 375);
-            c.lineTo(200, 425);
-            break;
-        case 10:
-            c.moveTo(250, 300);
-            c.lineTo(300, 350);
-            break;
-        case 11:
-            c.moveTo(250, 300);
-            c.lineTo(200, 350);
-            break;
-    }
-    
-    c.stroke();
-} 
+  switch (counter) {
+    case 1:
+      c.moveTo(canvas.width * (1 / 6), canvas.height * (25 / 27));
+      c.lineTo(canvas.width * (5 / 6), canvas.height * (25 / 27));
+      break;
+    case 2:
+      c.moveTo(canvas.width * (5 / 6), canvas.height * (25 / 27));
+      c.lineTo(canvas.width * (5 / 6), canvas.height * (1 / 10));
+      break;
+    case 3:
+      c.moveTo(canvas.width * (5 / 6), canvas.height * (1 / 10));
+      c.lineTo(canvas.width * (1 / 3), canvas.height * (1 / 10));
+      break;
+    case 4:
+      c.moveTo(canvas.width * (11 / 15), canvas.height * (1 / 10));
+      c.lineTo(canvas.width * (5 / 6), canvas.height * (7 / 30));
+      break;
+    case 5:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (1 / 10));
+      c.lineTo(canvas.width * (1 / 3), canvas.height * (1 / 4));
+      break;
+    case 6:
+      c.arc(canvas.width * (1 / 3), canvas.height * (1 / 4) + canvas.width * (1 / 20), canvas.width * (1 / 20), 0, 6.3);
+      break;
+    case 7:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (1 / 4) + canvas.width * (1 / 10));
+      c.lineTo(canvas.width * (1 / 3), canvas.height * (25 / 36));
+      break;
+    case 8:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (25 / 36));
+      c.lineTo(canvas.width * (4 / 9), canvas.height * (7 / 9));
+      break;
+    case 9:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (25 / 36));
+      c.lineTo(canvas.width * (2 / 9), canvas.height * (7 / 9));
+      break;
+    case 10:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (5 / 12));
+      c.lineTo(canvas.width * (4 / 9), canvas.height * (1 / 2));
+      break;
+    case 11:
+      c.moveTo(canvas.width * (1 / 3), canvas.height * (5 / 12));
+      c.lineTo(canvas.width * (2 / 9), canvas.height * (1 / 2));
+      break;
+  }
+  c.stroke();
+}

@@ -1,63 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+    <!-- HEAD -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='index.css'>
-    <link rel='icon' type='image/png' href="icon.png">
+    <link rel='icon' type='image/png' href="assets/icon.png">
     <title>Hangman</title>
-</head>
-<body>
 
+
+    <!-- BODY -->
     <h1>Hangman!</h1>
 
     <h2>The Great Game of Guessing...</h2>
 
-    <div id='main-menu'>
-        <button id='single-player'>Single Player</button>
-        <button id='multiplayer'>Multiplayer</button>
+    <div id="start-screen">
+        <img id='image' src='assets/icon.png' alt='Hangman Icon'>
+
+        <button id='main-menu'>Start</button>
     </div>
 
-    <div id='difficulty' class='hidden'>
-        <p>Select Difficulty:</p>
+    <div id='settings-screen'>
+        <div id='difficulty' class='hidden'>
+            <p>Select Difficulty:</p>
+            
+            <input type='radio' id='easy' value='easy' name='difficulty'>
+            <label for='easy'>Easy</label>
         
-        <input type='radio' id='easy' value='easy' name='difficulty'>Easy
-    
-        <input type='radio' id='normal' value='normal' name='difficulty' checked>Normal
+            <input type='radio' id='normal' value='normal' name='difficulty' checked>
+            <label for='normal'>Normal</label>
+            
+            <input type='radio' id='hard' value='hard' name='difficulty'>
+            <label for='hard'>Hard</label>
+        </div>
+
+        <div id='theme' class='hidden'>
+            <p>Select Theme:</p>
+            
+            <input type='radio' id='colours' value='colours' name='theme' checked>
+            <label for='colours'>Colours</label>
+            
+            <input type='radio' id='animals' value='animals' name='theme'>
+            <label for='animals'>Animals</label>
         
-        <input type='radio' id='hard' value='hard' name='difficulty'>Hard
+            <input type='radio' id='films' value='films' name='theme'>
+            <label for='films'>Films</label>
+            
+            <input type='radio' id='songs' value='songs' name='theme'>
+            <label for='songs'>Songs</label>
+        
+            <input type='radio' id='games' value='games' name='theme'>
+            <label for='games'>Games</label>
+        </div>
     </div>
 
-    <div id='theme' class='hidden'>
-        <p>Select theme:</p>
-        
-        <input type='radio' id='colours' value='colours' name='theme' checked>Colours
-        
-        <input type='radio' id='animals' value='animals' name='theme'>Animals
-    
-        <input type='radio' id='films' value='films' name='theme'>Films
-        
-        <input type='radio' id='songs' value='songs' name='theme'>Songs
-       
-        <input type='radio' id='games' value='games' name='theme'>Games
+    <div id='settings-screen-buttons'>
+        <button class='hidden' id='play-game'>Play Game!</button>
+        <button class="hidden" id="random" value="false">Random</button>
     </div>
 
-    <button class='hidden' id='play-game'>Play Game!</button>
+    <div id='gamescreen' class='hidden'>
 
-    <div id='game-screen' class='hidden'>
-        <p id='score'>Score: 0</p>
-        <p id='word'></p>
-        <canvas id='canvas' width='720' height='540'></canvas>
-        <div id='virtual-keyboard'></div>
+        <div id='score-canvas'>
+            <p id='score'>Score: 0</p>
+            <canvas id='canvas' width='720' height='540'></canvas>
+        </div>
+
+        <div id='word-vk'>
+            <p id='word'></p>
+            <div id='virtual-keyboard'></div>
+
+            <div id='gamescreen-buttons'>
+                <button id="replay" class="hidden">Replay Game</button>
+                <button id="settings-redirect" class="hidden">Back to Settings</button>
+                <button id='reset' class='hidden'>Back to Main Menu</button>
+            </div>
+        </div>
     </div>
-
-    <button id='reset' class='hidden'>Back to Main Menu</button>
 
     <script src="user_interface.mjs" type='module'></script>
 
-</body>
 </html>
-
-
-<!-- Sound ? -->
