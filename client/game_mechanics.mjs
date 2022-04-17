@@ -15,7 +15,8 @@ function prepareHandles() {
   el.resetButton = document.querySelector('#reset');
   el.randomButton = document.querySelector('#random');
   el.replayButton = document.querySelector('#replay');
-  el.back2SettingsBtn = document.querySelector('#settings-redirect');
+  el.back2SettingsBtn = document.querySelector('#back2Settings');
+  el.switch = document.querySelector('#switch');
 }
 
 function wordPicker() {
@@ -39,6 +40,11 @@ function randomWordPicker() {
   return wordPicker();
 }
 
+export function playClickSound() {
+  const audio = new Audio('assets/click.wav');
+  audio.play();
+}
+
 export function wordElemUpdater() {
   prepareHandles();
   if (el.randomButton.value === 'false') {
@@ -57,13 +63,17 @@ export function wordElemUpdater() {
 
 export function playGame(letter) {
   const letterLocation = document.querySelector(`#${letter}`);
+  const wrongGuessSound = new Audio('assets/wrong-guess.wav');
+  const rightGuessSound = new Audio('assets/right-guess.wav');
   if (letterLocation === null) {
     return;
   }
 
   if (letterChecker(letter, word) === true) {
+    rightGuessSound.play();
     remedyWord();
   } else {
+    wrongGuessSound.play();
     canvasUpdater();
   }
 
@@ -117,6 +127,13 @@ function letterChecker(letter, word) {
 
 function endOfGameChecker() {
   if (!el.wordLocation.textContent.includes('_') || wrongGuessCounter === 11) {
+    if (wrongGuessCounter === 11) {
+      const audio = new Audio('assets/game-lose.wav');
+      audio.play();
+    } else {
+      const audio = new Audio('assets/game-won.wav');
+      audio.play();
+    }
     el.resetButton.classList.remove('hidden');
     el.replayButton.classList.remove('hidden');
     el.back2SettingsBtn.classList.remove('hidden');
@@ -127,3 +144,10 @@ function endOfGameChecker() {
     vkReset();
   }
 }
+
+// Option to swich sound off
+// ARIA
+// better navigation
+// Random button reappear with the others at the end
+// Make more responsive
+// References

@@ -4,7 +4,7 @@ export function canvas(counter) {
   c.beginPath();
   c.lineCap = 'square';
   c.lineWidth = 3;
-  c.strokeStyle = '#D3D3D3';
+  c.strokeStyle = '#989898';
 
   switch (counter) {
     case 1:

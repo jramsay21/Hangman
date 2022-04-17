@@ -55,3 +55,4 @@ export function disableKeyboard() {
 
 // Merge functions
 // button disabled
+// Fix kb input error: buffer?

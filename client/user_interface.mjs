@@ -1,7 +1,5 @@
-import { wordElemUpdater } from './game_mechanics.mjs';
+import { wordElemUpdater, playClickSound } from './game_mechanics.mjs';
 import { enableKeyboard, vkSetup } from './keyboard.mjs';
-
-export const word = '';
 
 function userInterface() {
   const el = {};
@@ -10,21 +8,28 @@ function userInterface() {
   addEventListeners();
   vkSetup();
 
-  // Use querySelectorAll to squish handles + no longer have to use removeList and addList
   function prepareHandles() {
-    el.mainMenu = document.querySelector('#main-menu');
-    el.difficulty = document.querySelector('#difficulty');
-    el.theme = document.querySelector('#theme');
-    el.playGame = document.querySelector('#play-game');
-    el.gameScreen = document.querySelector('#gamescreen');
-    el.word = document.querySelector('#word');
-    el.reset = document.querySelector('#reset');
-    el.score = document.querySelector('#score');
-    el.canvas = document.querySelector('#canvas');
-    el.random = document.querySelector('#random');
-    el.replay = document.querySelector('#replay');
-    el.back2Settings = document.querySelector('#settings-redirect');
-    el.image = document.querySelector('#image');
+    const IDList = [
+      '#mainMenu',
+      '#difficulty',
+      '#theme',
+      '#playGame',
+      '#gameScreen',
+      '#word',
+      '#reset',
+      '#score',
+      '#canvas',
+      '#random',
+      '#replay',
+      '#back2Settings',
+      '#image',
+      '#switch',
+    ];
+    for (const elem of IDList) {
+      const handle = document.querySelector(elem);
+      el[handle.id] = handle;
+    }
+    el.radioBtns = document.querySelectorAll("input[type = 'radio']");
   }
 
   function addEventListeners() {
@@ -34,6 +39,10 @@ function userInterface() {
     el.random.addEventListener('click', randomGameDisplay);
     el.replay.addEventListener('click', replayTheme);
     el.back2Settings.addEventListener('click', settingsRedirect);
+    el.switch.addEventListener('click', modeSwitcher);
+    for (const btn of el.radioBtns) {
+      btn.addEventListener('click', playClickSound);
+    }
   }
 
   function addAClass(list) {
@@ -53,6 +62,7 @@ function userInterface() {
     const addList = [el.mainMenu, el.image];
     addAClass(addList);
     removeAClass(removeList);
+    playClickSound();
   }
 
   function gameDisplay() {
@@ -62,6 +72,7 @@ function userInterface() {
     removeAClass(removeList);
     addAClass(addList);
     wordElemUpdater();
+    playClickSound();
   }
 
   function randomGameDisplay() {
@@ -78,6 +89,7 @@ function userInterface() {
     el.score.textContent = 'Score: 0';
     el.canvas.getContext('2d').clearRect(0, 0, el.canvas.width, el.canvas.height);
     vkSetup();
+    playClickSound();
   }
 
   function replayTheme() {
@@ -89,6 +101,22 @@ function userInterface() {
   function settingsRedirect() {
     resetUI();
     settingsDisplay();
+  }
+
+  function modeSwitcher() {
+    playClickSound();
+    const root = document.querySelector(':root');
+    if (el.switch.checked === true) {
+      root.style.setProperty('--background-colour', '#FFFFFF');
+      root.style.setProperty('--primary-word-colour', '#202020');
+      root.style.setProperty('--second-word-colour', '#696969');
+      el.word.style.setProperty('color', '#202020');
+    } else {
+      root.style.setProperty('--background-colour', '#202020');
+      root.style.setProperty('--primary-word-colour', '#D3D3D3');
+      root.style.setProperty('--second-word-colour', '#C0C0C0');
+      el.word.style.setProperty('color', '#FFFFFF');
+    }
   }
 }
 
