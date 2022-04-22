@@ -1,5 +1,7 @@
 import { playGame } from './game_mechanics.mjs';
 
+// Keyboard file. Here are the enable and disable functions for both the VK and Keyboard as well as their event handlers
+
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 let pastGuesses = [];
 
@@ -18,9 +20,9 @@ const keyboardEventHandler = function (event) {
   if (!pastGuesses.includes(letter)) {
     playGame(letter);
     pastGuesses.push(letter);
-    const virtualKBBrother = document.querySelector(`#${letter}`);
-    if (virtualKBBrother !== null) {
-      virtualKBBrother.removeEventListener('click', vkEventHandler);
+    const virtualKBSibling = document.querySelector(`#${letter}`);
+    if (virtualKBSibling !== null) {
+      virtualKBSibling.removeEventListener('click', vkEventHandler);// VKSibling is the VK button that has the same value as the key pressed
     }
   }
 };
@@ -52,7 +54,3 @@ export function disableKeyboard() {
   window.removeEventListener('keyup', keyboardEventHandler);
   pastGuesses = [];
 }
-
-// Merge functions
-// button disabled
-// Fix kb input error: buffer?

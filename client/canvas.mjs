@@ -1,3 +1,5 @@
+// Canvas Function that progressivley draws gallows
+
 export function canvas(counter) {
   const canvas = document.querySelector('#canvas');
   const c = canvas.getContext('2d');

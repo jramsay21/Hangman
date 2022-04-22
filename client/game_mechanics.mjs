@@ -2,21 +2,30 @@ import { canvas } from './canvas.mjs';
 import { list } from './themes.mjs';
 import { disableKeyboard, vkReset } from './keyboard.mjs';
 
+// Most of the game's mechanisms are located here
+
 let score = 0;
 let wrongGuessCounter = 0;
 let word = '';
+let turnCount = 0;
 
 const el = {};
 const selection = ['songs', 'films', 'games', 'colours', 'animals'];
 
 function prepareHandles() {
-  el.scoreLocation = document.querySelector('#score');
-  el.wordLocation = document.querySelector('#word');
-  el.resetButton = document.querySelector('#reset');
-  el.randomButton = document.querySelector('#random');
-  el.replayButton = document.querySelector('#replay');
-  el.back2SettingsBtn = document.querySelector('#back2Settings');
-  el.switch = document.querySelector('#switch');
+  const IDList = [
+    '#score',
+    '#word',
+    '#reset',
+    '#random',
+    '#replay',
+    '#back2Settings',
+    '#goBack',
+  ];
+  for (const elem of IDList) {
+    const handle = document.querySelector(elem);
+    el[handle.id] = handle;
+  }
 }
 
 function wordPicker() {
@@ -36,32 +45,34 @@ function randomWordPicker() {
   const randDiffChoice = document.querySelectorAll("input[type = 'radio'][name = 'difficulty']");
   randThemeChoice[Math.floor(Math.random() * 5)].checked = true;
   randDiffChoice[Math.floor(Math.random() * 3)].checked = true;
-  el.randomButton.value = 'false';
+  el.random.value = 'false';
   return wordPicker();
 }
 
 export function playClickSound() {
   const audio = new Audio('assets/click.wav');
-  audio.play();
+  checkSound(audio);
 }
 
 export function wordElemUpdater() {
   prepareHandles();
-  if (el.randomButton.value === 'false') {
+  if (el.random.value === 'false') {
     word = wordPicker();
   } else {
     word = randomWordPicker();
   }
   for (const letter of word) {
     if (letter !== ' ') {
-      el.wordLocation.textContent = el.wordLocation.textContent + '_';
+      el.word.textContent = el.word.textContent + '_';
     } else {
-      el.wordLocation.textContent = el.wordLocation.textContent + ' ';
+      el.word.textContent = el.word.textContent + ' ';
     }
   }
 }
 
 export function playGame(letter) {
+  // The main game function which occurs when a user clicks a button or presses a key
+
   const letterLocation = document.querySelector(`#${letter}`);
   const wrongGuessSound = new Audio('assets/wrong-guess.wav');
   const rightGuessSound = new Audio('assets/right-guess.wav');
@@ -69,11 +80,11 @@ export function playGame(letter) {
     return;
   }
 
-  if (letterChecker(letter, word) === true) {
-    rightGuessSound.play();
+  if (letterChecker(letter, word)) {
+    checkSound(rightGuessSound);
     remedyWord();
   } else {
-    wrongGuessSound.play();
+    checkSound(wrongGuessSound);
     canvasUpdater();
   }
 
@@ -92,7 +103,7 @@ export function playGame(letter) {
           wordReplacement = wordReplacement + ' ';
           break;
         default:
-          if (el.wordLocation.textContent.includes(index)) {
+          if (el.word.textContent.includes(index)) {
             wordReplacement = wordReplacement + index;
           } else {
             wordReplacement = wordReplacement + '_';
@@ -100,7 +111,7 @@ export function playGame(letter) {
       }
     }
 
-    el.wordLocation.textContent = wordReplacement;
+    el.word.textContent = wordReplacement;
     scoreUpdater(50);
   }
 
@@ -111,12 +122,13 @@ export function playGame(letter) {
     canvas(wrongGuessCounter);
   }
 
+  turnCount = turnCount + 1;
   endOfGameChecker();
 }
 
 function scoreUpdater(number) {
   score = score + number;
-  el.scoreLocation.textContent = `Score: ${score}`;
+  el.score.textContent = `Score: ${score}`;
 }
 
 function letterChecker(letter, word) {
@@ -125,29 +137,33 @@ function letterChecker(letter, word) {
   return newWord.includes(letter);
 }
 
+function checkSound(audio) {
+  const mutePage = document.querySelector('#sound').checked;
+  if (mutePage) {
+    audio.play();
+  }
+} // This function checks if the sound on option is checked or not before playing the sound
+
 function endOfGameChecker() {
-  if (!el.wordLocation.textContent.includes('_') || wrongGuessCounter === 11) {
+  if (!el.word.textContent.includes('_') || wrongGuessCounter === 11) {
     if (wrongGuessCounter === 11) {
       const audio = new Audio('assets/game-lose.wav');
-      audio.play();
+      checkSound(audio);
     } else {
       const audio = new Audio('assets/game-won.wav');
-      audio.play();
+      checkSound(audio);
     }
-    el.resetButton.classList.remove('hidden');
-    el.replayButton.classList.remove('hidden');
-    el.back2SettingsBtn.classList.remove('hidden');
-    el.scoreLocation.textContent = `Your final score was: ${score}`;
+    el.reset.classList.remove('hidden');
+    el.replay.classList.remove('hidden');
+    el.back2Settings.classList.remove('hidden');
+    el.random.classList.remove('hidden');
+    el.goBack.classList.add('hidden');
+    document.querySelector('#gameScreen-buttons').append(el.random);
+    el.score.textContent = `Your final score was: ${score} in ${turnCount} turns`;
     score = 0;
     wrongGuessCounter = 0;
+    turnCount = 0;
     disableKeyboard();
     vkReset();
   }
 }
-
-// Option to swich sound off
-// ARIA
-// better navigation
-// Random button reappear with the others at the end
-// Make more responsive
-// References

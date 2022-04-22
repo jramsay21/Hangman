@@ -1,6 +1,6 @@
 @font-face {
     font-family: "04b_30";
-    src: url('assets/04B_30__.TTF');
+    src: url('assets/04B_30__.TTF');  /* Web Font */
 }
 
 :root {
@@ -94,6 +94,14 @@ label[for='switch']::after {
 #switch:checked + label[for='switch']::after {
     right: calc(0.9em - 100%);
     transform: translateX(100%);
+}
+
+#goBack{
+    font-size: 0.5em;
+    margin: auto;
+    position: absolute;
+    bottom: 1%;
+    left: 48%;
 }
 
 button{
@@ -207,6 +215,25 @@ input[type='radio'][name='difficulty'], input[type='radio'][name='theme']{
     align-items: center;
 }
 
+
+#sound:checked{
+    filter: grayscale(95%);
+}
+
+label[for='sound']{
+    font-family: var(--font);
+    color: var(--primary-word-colour);
+    position: absolute;
+    bottom: 1%;
+}
+
+@media screen and (max-width: 80em) {
+    #goBack{
+        bottom: auto;
+        transform: translateY(5em);
+    }
+}
+
 @media screen and (max-width: 50em){
 
     #canvas {
@@ -244,6 +271,9 @@ input[type='radio'][name='difficulty'], input[type='radio'][name='theme']{
         font-size: 2em;
     }
 
+    #goBack{
+        left: 42%;
+    }
 }
 
 @media screen and (max-width: 110em){
@@ -268,9 +298,28 @@ input[type='radio'][name='difficulty'], input[type='radio'][name='theme']{
         width: auto;
         transform: translateX(0em);
     }
+
+    label[for='sound']{
+        position: relative;
+        top: 3em;
+    }
+
+    label[for='switch']{
+        position: relative;
+        top: 4em;
+        left: 93%;
+    }
+
 }
 
-/* Possibly use only. If not, remove and */
+@media screen and (max-width: 40em) {
+    label[for='switch']{
+        position: relative;
+        top: 4em;
+        left: 90%;
+    }
+    
+}
 
 @media screen and (max-height: 50em) {
     h1{

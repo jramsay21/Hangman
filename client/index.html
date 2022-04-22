@@ -16,11 +16,14 @@
 
     <h2>The Great Game of Guessing...</h2>
 
+    <!-- Main Menu -->
     <div id="start-screen">
         <img id='image' src='assets/icon.png' alt='Hangman Icon'>
 
         <button id='mainMenu'>Start</button>
     </div>
+
+    <!-- Settings Menu -->
 
     <div id='settings-screen'>
         <div id='difficulty' class='hidden'>
@@ -58,8 +61,10 @@
 
     <div id='settings-screen-buttons'>
         <button class='hidden' id='playGame'>Play Game!</button>
-        <button class="hidden" id="random" value="false">Random</button>
+        <button class="hidden" id="random" value="false">Random Theme</button>
     </div>
+
+    <!-- Game Screen -->
 
     <div id='gameScreen' class='hidden'>
 
@@ -73,16 +78,26 @@
             <div id='virtual-keyboard'></div>
 
             <div id='gameScreen-buttons'>
-                <button id="replay" class="hidden">Replay Game</button>
+                <button id="replay" class="hidden">Replay Theme</button>
                 <button id="back2Settings" class="hidden">Back to Settings</button>
                 <button id='reset' class='hidden'>Back to Main Menu</button>
             </div>
         </div>
     </div>
 
+    <!-- Quality of Life Buttons -->
+
     <input id='switch' type='checkbox'>
     <label for='switch'></label>
 
+    <label for="sound">
+        <input id="sound" type="checkbox" checked>Sound On
+    </label>
+
+    <button class="hidden" id="goBack">Go Back</button>
+
+    <!-- Script Tag -->
+    
     <script src="user_interface.mjs" type='module'></script>
 
 </html>

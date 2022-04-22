@@ -1,3 +1,5 @@
+// This is the entire word dictionary for the web app. Categorised by theme and difficulty
+
 const songs = {
   easy: ['Hey Jude', 'Bad Habits', 'Wrecking Ball', 'Despacito', 'My Girl'],
   normal: ['Stairway to Heaven', 'Gold Digger', 'Enter Sandman', 'Clint Eastwood', 'I Just Called To Say I Love You'],
